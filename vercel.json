@@ -1,0 +1,11 @@
+{
+  "build": {
+    "env": {
+      "HUGO_VERSION": "0.154.5"
+    }
+  },
+  "framework": "hugo",
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "trailingSlash": true
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} — {{ site.Title }}{{ end }}</title>
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}" />
+    <link rel="alternate" type="application/rss+xml" href="{{ "index.xml" | absURL }}" />
+    <style>
+      body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;max-width:860px;margin:0 auto;padding:24px;line-height:1.6}
+      header{margin-bottom:28px}
+      nav a{margin-right:12px}
+      article{margin:18px 0}
+      .meta{color:#666;font-size:0.9em}
+      code,pre{background:#f6f8fa;padding:2px 4px;border-radius:4px}
+      pre{padding:12px;overflow:auto}
+      a{color:#0969da;text-decoration:none}
+      a:hover{text-decoration:underline}
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1><a href="{{ "/" | relURL }}">{{ site.Title }}</a></h1>
+      <p class="meta">{{ site.Params.description }}</p>
+      <nav>
+        <a href="{{ "/blog/" | relURL }}">Блог</a>
+        <a href="{{ "/index.xml" | relURL }}">RSS</a>
+      </nav>
+    </header>
+
+    {{ block "main" . }}{{ end }}
+
+    <footer class="meta" style="margin-top:40px">
+      <p>© {{ now.Year }} HBTCFO</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+baseURL = "https://hbtcfo-finance-blog.vercel.app/"
+languageCode = "ru-ru"
+title = "HBTCFO Finance"
+
+[pagination]
+  pagerSize = 12
+
+[params]
+  description = "Финансовые новости, инсайты, исторические экскурсы и тренды — с юмором и цифрами."
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[permalinks]
+  blog = "/blog/:filename/"
+
+[taxonomies]
+  tag = "tags"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

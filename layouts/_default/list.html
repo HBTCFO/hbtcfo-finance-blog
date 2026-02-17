@@ -1,0 +1,10 @@
+{{ define "main" }}
+  <h2>{{ if .IsHome }}Последние публикации{{ else }}{{ .Title }}{{ end }}</h2>
+  {{ range .Pages.ByDate.Reverse }}
+    <article>
+      <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+      <div class="meta">{{ .Date.Format "2006-01-02 15:04" }}</div>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    </article>
+  {{ end }}
+{{ end }}
