@@ -3,35 +3,47 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} — {{ site.Title }}{{ end }}</title>
-    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}" />
+
+    {{ $title := (cond .IsHome site.Title (printf "%s — %s" .Title site.Title)) }}
+    {{ $desc := (cond (ne .Description "") .Description site.Params.description) }}
+
+    <title>{{ $title }}</title>
+    <meta name="description" content="{{ $desc }}" />
+
+    <!-- OpenGraph / Twitter -->
+    <meta property="og:title" content="{{ $title }}" />
+    <meta property="og:description" content="{{ $desc }}" />
+    <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}" />
+    <meta property="og:url" content="{{ .Permalink }}" />
+    <meta name="twitter:card" content="summary" />
+
     <link rel="alternate" type="application/rss+xml" href="{{ "index.xml" | absURL }}" />
-    <style>
-      body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;max-width:860px;margin:0 auto;padding:24px;line-height:1.6}
-      header{margin-bottom:28px}
-      nav a{margin-right:12px}
-      article{margin:18px 0}
-      .meta{color:#666;font-size:0.9em}
-      code,pre{background:#f6f8fa;padding:2px 4px;border-radius:4px}
-      pre{padding:12px;overflow:auto}
-      a{color:#0969da;text-decoration:none}
-      a:hover{text-decoration:underline}
-    </style>
+    <link rel="stylesheet" href="{{ "/style.css" | relURL }}" />
   </head>
   <body>
-    <header>
-      <h1><a href="{{ "/" | relURL }}">{{ site.Title }}</a></h1>
-      <p class="meta">{{ site.Params.description }}</p>
-      <nav>
-        <a href="{{ "/blog/" | relURL }}">Блог</a>
-        <a href="{{ "/index.xml" | relURL }}">RSS</a>
-      </nav>
-    </header>
+    <div class="container">
+      <header class="header">
+        <div class="brand">
+          <div class="brand-title"><a href="{{ "/" | relURL }}">{{ site.Title }}</a></div>
+          <div class="brand-desc">{{ site.Params.description }}</div>
+        </div>
+        <nav class="nav">
+          <a href="{{ "/blog/" | relURL }}">Блог</a>
+          <a href="{{ "/about/" | relURL }}">О проекте</a>
+          <a href="{{ "/subscribe/" | relURL }}">Подписка</a>
+          <a href="{{ "/index.xml" | relURL }}">RSS</a>
+        </nav>
+      </header>
 
-    {{ block "main" . }}{{ end }}
+      {{ block "main" . }}{{ end }}
 
-    <footer class="meta" style="margin-top:40px">
-      <p>© {{ now.Year }} HBTCFO</p>
-    </footer>
+      <footer class="footer">
+        <span>© {{ now.Year }} HBTCFO</span>
+        <span>
+          <a href="{{ "/index.xml" | relURL }}">RSS</a> ·
+          <a href="https://github.com/HBTCFO/hbtcfo-finance-blog">GitHub</a>
+        </span>
+      </footer>
+    </div>
   </body>
 </html>

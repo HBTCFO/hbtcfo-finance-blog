@@ -1,11 +1,38 @@
 {{ define "main" }}
-  {{ $p := where site.RegularPages "Section" "blog" }}
-  {{ range first 10 ($p.ByDate.Reverse) }}
-    <article>
-      <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-      <div class="meta">{{ .Date.Format "2006-01-02 15:04" }}</div>
-      {{ with .Description }}<p>{{ . }}</p>{{ end }}
-    </article>
-  {{ end }}
-  <p><a href="{{ "/blog/" | relURL }}">Все посты →</a></p>
+  <section class="hero">
+    <div class="panel">
+      <h2>Что это</h2>
+      <p>
+        Два поста в день: утром и вечером (МСК). Новости, тренды, исторические кейсы.
+        Без воды: цифры, источники, выводы. Иногда — лёгкая ирония.
+      </p>
+    </div>
+    <div class="panel">
+      <h2>Формат</h2>
+      <div class="badge"><b>Утро</b> что важно сегодня рынкам</div>
+      <div style="height:10px"></div>
+      <div class="badge"><b>Вечер</b> разбор тренда / кейс / факт</div>
+    </div>
+  </section>
+
+  {{ $posts := where site.RegularPages "Section" "blog" }}
+  <div class="grid">
+    {{ range first 8 ($posts.ByDate.Reverse) }}
+      <article class="card">
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <div class="meta">
+          <span>{{ .Date.Format "2006-01-02 15:04" }}</span>
+          {{ with .Params.tags }}
+            <span>·</span>
+            <span class="tags">
+              {{ range first 3 . }}<span class="tag">#{{ . }}</span>{{ end }}
+            </span>
+          {{ end }}
+        </div>
+        {{ with .Description }}<p>{{ . }}</p>{{ end }}
+      </article>
+    {{ end }}
+  </div>
+
+  <p style="margin-top:16px"><a href="{{ "/blog/" | relURL }}">Все посты →</a></p>
 {{ end }}

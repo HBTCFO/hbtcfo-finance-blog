@@ -1,7 +1,21 @@
 {{ define "main" }}
-  <article>
-    <h2>{{ .Title }}</h2>
-    <div class="meta">{{ .Date.Format "2006-01-02 15:04" }} · {{ with .Params.tags }}{{ delimit . ", " }}{{ end }}</div>
+  <article class="article">
+    <h1>{{ .Title }}</h1>
+    <div class="meta">
+      <span>{{ .Date.Format "2006-01-02 15:04" }}</span>
+      {{ with .Params.tags }}
+        <span>·</span>
+        <span class="tags">
+          {{ range . }}<span class="tag">#{{ . }}</span>{{ end }}
+        </span>
+      {{ end }}
+    </div>
+
     {{ .Content }}
+
+    <hr style="border:none;border-top:1px solid var(--border);margin:22px 0" />
+    <div class="meta">
+      <a href="{{ "/blog/" | relURL }}">← к списку</a>
+    </div>
   </article>
 {{ end }}

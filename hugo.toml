@@ -2,6 +2,8 @@ baseURL = "https://hbtcfo-finance-blog.vercel.app/"
 languageCode = "ru-ru"
 title = "HBTCFO Finance"
 
+enableRobotsTXT = true
+
 [pagination]
   pagerSize = 12
 
