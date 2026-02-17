@@ -1,0 +1,15 @@
+{{- /* Hugo JSON output for client-side search */ -}}
+{{- $pages := where site.RegularPages "Section" "blog" -}}
+[
+{{- range $i, $p := $pages.ByDate.Reverse -}}
+  {{- if $i }},{{ end -}}
+  {
+    "title": {{ $p.Title | jsonify }},
+    "date": {{ $p.Date.Format "2006-01-02 15:04" | jsonify }},
+    "url": {{ $p.RelPermalink | jsonify }},
+    "description": {{ ($p.Description | default "") | jsonify }},
+    "tags": {{ ($p.Params.tags | default (slice)) | jsonify }},
+    "content": {{ ($p.Plain | default "") | jsonify }}
+  }
+{{- end -}}
+]

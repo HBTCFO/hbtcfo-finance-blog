@@ -1,0 +1,18 @@
+{{ define "main" }}
+  <h2>#{{ .Title }}</h2>
+  <div class="grid">
+    {{ range .Pages.ByDate.Reverse }}
+      <article class="card">
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <div class="meta">
+          <span>{{ .Date.Format "2006-01-02 15:04" }}</span>
+          {{ with .Params.tags }}
+            <span>·</span>
+            <span class="tags">{{ range first 6 . }}<span class="tag">#{{ . }}</span>{{ end }}</span>
+          {{ end }}
+        </div>
+        {{ with .Description }}<p>{{ . }}</p>{{ end }}
+      </article>
+    {{ end }}
+  </div>
+{{ end }}
