@@ -3,6 +3,9 @@ public/
 resources/
 .hugo_build.lock
 
+# Local build artifacts
+out/
+
 # OS
 .DS_Store
 Thumbs.db
