@@ -5,7 +5,7 @@ description: "Тестовая публикация: проверяем, что 
 tags: ["test", "pipeline", "langsearch"]
 ---
 
-Это тестовая статья для проверки нового пути поиска через LangSearch wrapper (`scripts/langsearch_search.py`).
+Это тестовая статья для проверки нового пути поиска через LangSearch wrapper (`scripts/langsearch_search.py`). (retrigger deploy)
 
 ## Что проверяем
 - Поиск по ключевым словам возвращает релевантные ссылки.
