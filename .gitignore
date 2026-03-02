@@ -6,6 +6,9 @@ resources/
 # Local build artifacts
 out/
 
+# Temp
+tmp/
+
 # OS
 .DS_Store
 Thumbs.db
